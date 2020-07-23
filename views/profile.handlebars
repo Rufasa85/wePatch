@@ -1,0 +1,17 @@
+<h1>{{name}}'s Profile!</h1>
+<h2>email: {{email}}</h2>
+{{#each Patches}}
+    <div class="card">
+        <h4>lat: {{lat}} lng:{{lng}} area:{{area}}</h4>
+        <button>Edit</button>
+        <button data-id={{id}} class="deletePatchBtn">Delete</button>
+    </div>
+{{/each}}
+<h3>Add a patch!</h3>
+<form>
+    <input type="text" name="lat" placeholder="lattitude" id="latInput"/>
+    <input type="text" name="long" placeholder="longitude" id="longInput"/>
+    <input type="text" name="area" placeholder="area" id="areaInput"/>
+    <button>Add patch</button>
+    <script src="/js/profile.js"></script>
+</form>

@@ -1,0 +1,19 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+body {
+    background-color: salmon;
+}
+
+.card {
+    display: inline-block;
+    width:25%;
+    height:30vh;
+    overflow:scroll;
+    box-shadow: 4px 4px 6px black;
+    border: 1px solid black;
+    margin: 0 10px;
+}
