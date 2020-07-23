@@ -1,5 +1,6 @@
 <h1>{{name}}'s Profile!</h1>
 <h2>email: {{email}}</h2>
+<h3>My Patches</h3>
 {{#each Patches}}
     <div class="card">
         <h4>lat: {{lat}} lng:{{lng}} area:{{area}}</h4>
@@ -7,11 +8,19 @@
         <button data-id={{id}} class="deletePatchBtn">Delete</button>
     </div>
 {{/each}}
+<h3>Where I garden</h3>
+{{#each Gardens}}
+    <div class="card">
+        <h3>Owned By: {{User.name}} <a href="/profile/{{User.id}}">his page</a></h3>
+        <h4>lat: {{lat}} lng:{{lng}} area:{{area}}</h4>
+    </div>
+{{/each}}
 <h3>Add a patch!</h3>
-<form>
+<form id = "addPatchForm">
     <input type="text" name="lat" placeholder="lattitude" id="latInput"/>
-    <input type="text" name="long" placeholder="longitude" id="longInput"/>
+    <input type="text" name="long" placeholder="longitude" id="lngInput"/>
     <input type="text" name="area" placeholder="area" id="areaInput"/>
+    <input type="hidden" name="userId" id="userId" value={{id}}>
     <button>Add patch</button>
     <script src="/js/profile.js"></script>
 </form>

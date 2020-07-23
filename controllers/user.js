@@ -21,6 +21,20 @@ router.get("/withpatches",(req,res)=>{
         res.status(500).end()
     })
 })
+router.get("/withdata",(req,res)=>{
+    db.User.findAll({
+        include:[db.Patch,{
+            model:db.Patch,
+            as: "Gardens",
+            include:[db.User]
+        }]
+    }).then(userData=>{
+        res.json(userData)
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).end()
+    })
+})
 
 router.post('/',(req,res)=>{
     db.User.create({

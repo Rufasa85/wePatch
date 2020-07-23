@@ -1,0 +1,12 @@
+{{#each users}}
+    <div class="card">
+        <h3>{{name}}</h3>
+        <h5>{{email}}</h5>
+        <p>My Patches</p>
+        <ul>
+            {{#each Patches}}
+                <li>lat:{{lat}} lng:{{lng}} area:{{area}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/each}}

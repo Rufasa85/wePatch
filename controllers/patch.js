@@ -21,12 +21,27 @@ router.get("/withowners",(req, res) => {
         res.status(500).end()
     })
 })
+router.get("/withdata",(req, res) => {
+    db.Patch.findAll({
+        include:[db.User,{
+            model:db.User,
+            as:"Gardener"
+        }]
+    }).then(patchData => {
+        res.json(patchData)
+    }).catch(err => {
+        console.log(err);
+        res.status(500).end()
+    })
+})
+
 router.post('/', (req, res) => {
     db.Patch.create({
         area: req.body.area,
         lat: req.body.lat,
         lng: req.body.lng,
-        UserId: req.body.UserId
+        UserId: req.body.UserId,
+        GardenerId: req.body.GardenerId
     }).then(patchData => {
         res.json(patchData)
     }).catch(err => {
@@ -77,13 +92,29 @@ router.put('/:id', (req, res) => {
     db.Patch.update({
         area: req.body.area,
         lat: req.body.lat,
-        lng: req.body.lng
+        lng: req.body.lng,
+        GardenerId: req.body.GardenerId
     }, {
         where: {
             id: req.params.id
         }
     }).then(patchData => {
         res.json(patchData)
+    }).catch(err => {
+        console.log(err);
+        res.status(500).end()
+    })
+})
+router.put("/:id/claimpatch",(req,res)=>{
+    db.Patch.update({
+        GardenerId: req.body.GardenerId
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(patchData => {
+        // res.json(patchData)
+        res.json({claimedBy:req.body.GardenerId})
     }).catch(err => {
         console.log(err);
         res.status(500).end()

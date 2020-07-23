@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     //   // When an User is deleted, also delete any associated Posts
       User.hasMany(models.Patch);
       User.hasMany(models.Patch,{
-        as :"Gardener"
+        as :"Gardens",
+        foreignKey:"GardenerId"
       });
     };
   

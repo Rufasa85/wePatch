@@ -9,3 +9,20 @@ $(".deletePatchBtn").click(function(event){
         location.reload();
     })
 })
+
+$("#addPatchForm").submit(function(event){
+    event.preventDefault();
+    const patchObj = {
+        lat:parseFloat($("#latInput").val()),
+        lng:parseFloat($("#lngInput").val()),
+        area:parseFloat($("#areaInput").val()),
+        UserId:parseInt($("#userId").val())
+    }
+    $.ajax({
+        url:"/api/patches",
+        method:"POST",
+        data: patchObj
+    }).then(data=>{
+        location.reload();
+    })
+})

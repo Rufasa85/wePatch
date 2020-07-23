@@ -1,12 +1,14 @@
-{{#each users}}
+{{#each patches}}
     <div class="card">
-        <h3>{{name}}</h3>
-        <h5>{{email}}</h5>
-        <p>My Patches</p>
-        <ul>
-            {{#each Patches}}
-                <li>lat:{{lat}} lng:{{lng}} area:{{area}}</li>
-            {{/each}}
-        </ul>
+        <h1>{{User.name}}'s patch</h1>
+        <h3>lat :{{lat}} lng: {{lng}} area: {{area}}</h3>
+        {{#if GardenerId}}
+        <h5>Gardener: {{GardenerId}}</h5>
+        {{/if}}
+        {{#unless GardenerId}}
+        <button class="claimPatch" data-id={{id}}>claim patch!</button>
+        {{/unless}}
     </div>
+
 {{/each}}
+<script src="/js/home.js"></script>

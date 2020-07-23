@@ -1,7 +1,21 @@
 const router = require("express").Router();
 const db = require("../models")
 
-router.get('/',(req,res)=>{
+router.get("/",(req,res)=>{
+    db.Patch.findAll({
+        include:[db.User]
+    }).then(patchData=>{
+        const patchDataJSON = patchData.map(patchObj=>{
+            return patchObj.toJSON();
+        })
+        const hbsObj= {
+            patches:patchDataJSON
+        }
+        res.render("index",hbsObj)
+    })
+})
+
+router.get('/usercards',(req,res)=>{
     db.User.findAll({
         include:[db.Patch]
     }).then(userData=>{
@@ -12,7 +26,7 @@ router.get('/',(req,res)=>{
             users:userDataJSON
         }
         console.log(userDataJSON);
-        res.render("index",hbsObj);
+        res.render("usercards",hbsObj);
     })
 })
 
@@ -21,7 +35,11 @@ router.get("/profile/:id",(req,res)=>{
         where:{
             id:req.params.id
         },
-        include:[db.Patch]
+        include:[db.Patch,{
+            model:db.Patch,
+            as:"Gardens",
+            include:[db.User]
+        }]
     }).then(userData=>{
         const userJSON = userData.toJSON();
         res.render("profile",userJSON);
